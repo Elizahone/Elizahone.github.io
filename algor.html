@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>异或运算的骚操作</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+    pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+    }
+    code {
+        font-family: monospace;
+    }
+</style>
+</head>
+<body>
+
+<h2><a href="https://www.bilibili.com/video/BV1LN411z7nu/?spm_id_from=333.999.0.0">异或运算的骚操作</a></h2>
+
+<h3>1、交换两个数</h3>
+<pre><code class="language-cpp">
+a = a ^ b
+b = a ^ b
+a = a ^ b
+</code></pre>
+
+<h3>2、不用任何判断和比较操作，返回两数的最大值</h3>
+<pre><code class="language-cpp">
+int flip(n){ // 1 变 0， 0 变 1
+    return n ^ 1;
+}
+int sign(int n){ // 判断该数的符号位，非负返回 1 ，负数返回 0
+    return flip(n >> 31);
+}
+int getMax1(int a, int b){ // 有溢出风险 当 a b 符号不一样是会溢出
+    int c = a - b;
+    int returnA = sign(c); // c < 0,则a大，反之
+    int ruturnB = flip(returnA); // returnA 是 1 ，b 则为 0，反之
+    return a * returnA + b * returnB; // 省去判断操作
+}
+
+int getMax2(int a, int b){
+    int c = a - b;
+    // 得出a b c 的正负
+    int sa = sign(a);
+    int sb = sign(b);
+    int sc = sign(c);
+    int diffAB = sa ^ ab; // 符号不一样则为 1，一样为 0
+    int sameAB = flip(diffAB); // 符号一样为 1， 不一样 为 0
+    returnA = diffAB * sa + sameAB * sc; // + 号两边只有一个成立
+    returnB = flip(returnA);
+    return a * returnA + b * returnB;
+}
+</code></pre>
+
+<h3>3、缺失的数</h3>
+<pre><code class="language-cpp">
+int missingNum(int arr[]){
+// nums 长度是10， 0 ~ 10 中缺了一个
+    int eorALL = 0, eorHas = 0;
+    for(int i = 0; i < arr.size(); i++){
+        eorALL ^= i;
+        eorHas ^= arr[i]; 
+    }
+    eorALL ^= arr.size();
+    return eorALL ^ eorHas;
+}
+</code></pre>
+
+<h2>Brian Kernighan 算法</h2>
+<h3>此算法是指取得二进制位最右侧的 1 所代表的数：n & -n</h3>
+
+</body>
+</html>
