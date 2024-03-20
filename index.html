@@ -1,12 +1,57 @@
 <!DOCTYPE html>
-<html>
-    <head>
-    <meta charset="utf-8">
-    <title>Welcom come to my blog.</title>
-    </head>
-    <body>
-        <h1>我的第一个标题</h1>
-        <p>我的第一个段落。</p>
-        <h2><a href="./Algorithm.html">算法</a></h2>
-    </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>需要密码的链接</title>
+<style>
+/* 可以添加一些样式来美化页面 */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+}
+form {
+    display: none; /* 默认隐藏密码输入框 */
+}
+</style>
+</head>
+<body>
+
+<h1>需要密码的链接</h1>
+
+<p>点击下面的链接以查看受保护的内容：</p>
+
+<a href="./Algorithm.html" onclick="showPasswordForm()">算法</a>
+
+<form id="passwordForm" onsubmit="return validatePassword()">
+    <label for="password">请输入密码：</label>
+    <input type="password" id="password" name="password">
+    <button type="submit">提交</button>
+</form>
+
+<div id="protectedContent" style="display: none;">
+    <h2>受保护的内容</h2>
+    <p>这是受密码保护的内容。</p>
+</div>
+
+<script>
+function showPasswordForm() {
+    document.getElementById("passwordForm").style.display = "block";
+}
+
+function validatePassword() {
+    var password = document.getElementById("password").value;
+    // 在这里进行密码验证，这里只是一个示例
+    if (password === "your_password") {
+        document.getElementById("passwordForm").style.display = "none";
+        document.getElementById("protectedContent").style.display = "block";
+        return false; // 防止表单提交
+    } else {
+        alert("密码错误，请重试！");
+        return false; // 防止表单提交
+    }
+}
+</script>
+
+</body>
 </html>
