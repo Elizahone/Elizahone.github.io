@@ -26,7 +26,7 @@ tar -zxvf path/to/Java.tar.gz -C path/to/Java
 `-C` 后的路径是你要将压缩吧解压到的路径，可根据需要自行更改。本指南将安装到 `/opt/Java`中，因此，上方命令应 个性化 为 ： `tar -zxvf ./jdk-11.0.2_linux-x64_bin.tar.gz -C /opt/Java`
 
 入下所示：
-![[Pasted image 20240321175524.png]]
+![[./assert/Pasted image 20240321175524.png]]
 
 **接着配置环境变量**：
 配置环境变量需要修改 home 目录下的 .bashrc 文件，某些系统可能还存在~/.bash_profile， 建议修改 `~/.bash_profile`， 如果没有，请修改 `~/.bashrc
@@ -41,7 +41,7 @@ export PATH=$PATH:$JAVA_HOME/bin
 关于`JAVA_HOME` 请赋值为自己JAVA安装的路径，切忌照葫芦画瓢
 输入 `java -version` 查看是否安装成功
 
-![[Pasted image 20240321180425.png]]
+![[./assert/Pasted image 20240321180425.png]]
 
 ## Hadoop安装与配置
 
