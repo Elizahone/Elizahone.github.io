@@ -1,7 +1,7 @@
 # Algorithm Notes
 <h1>目录：</h1>
 
-[位运算](#bitmap)
+<li>[位运算](#bitmap)</li>
 
 # [时间、空间复杂度](https://www.bilibili.com/video/BV1JV411G7De/?spm_id_from=333.999.0.0&vd_source=3e78417e114be9d4af93565f11845737)
 
