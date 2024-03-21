@@ -16,24 +16,29 @@ form {
 </style>
 </head>
 <body>
-<h2><a href="#" onclick="showPasswordForm()">算法</a></h2>
+<h2><a href="#" onclick="showPasswordForm('./Algorithm.html')">Algorithm</a></h2>
 
 <form id="passwordForm" onsubmit="return validatePassword()">
     <label for="password">请输入密码：</label>
     <input type="password" id="password" name="password">
     <button type="submit">提交</button>
 </form>
+
+// 密码验证逻辑
 <script>
-function showPasswordForm() {
+// 全局目标地址
+var target = "#";
+function showPasswordForm(_herf) {
     document.getElementById("passwordForm").style.display = "block";
+    target = _herf;
 }
 
 function validatePassword() {
     var password = document.getElementById("password").value;
     // 在这里进行密码验证，这里只是一个示例
-    if (password === "123") {
+    if (password === "9527") {
         // 密码验证通过后跳转到指定页面
-        window.location.href = "./Algorithm.html";
+        window.location.href = target;
         return false; // 防止表单提交
     } else {
         alert("密码错误，请重试！");
