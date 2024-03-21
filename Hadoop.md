@@ -3,7 +3,7 @@
 - [Java安装与配置环境变量](#Java安装与配置环境变量)
 - [Hadoop安装与配置](#Hadoop安装与配置)
 - [伪分布式配置](#伪分布式配置)
-- 
+- [SSH配置](SSH配置)
 
 ## Java安装与配置环境变量
 由于hadoop集群是用Java编写的，故想运行 **hadoop** 必须先安装 **Java** 环境， 安装方法如下：</br>
@@ -72,4 +72,18 @@ export JAVA_HOME=/opt/Java//opt/Java/jdk-11.0.2
 由于书中案例给的足够详细，便在此不再赘述，请见 [厦门大学提供的文档](https://dblab.xmu.edu.cn/blog/2441/)
 
 ## 分布式集群配置
-。。。。。
+写ing
+
+## SSH配置
+
+由于VMWare的NAT模式的 `ip` 地址默认是以`192.168.xxx.xxx`形式配置，故不在此介绍。
+
+VirtualBox默认NAT配置`IP`为`10.0.xxx.xxx`,虽然也是局域网，但不知出于何种原因无法在主机上`SSH`连接，可以在网络连接设置中改为仅主机(Host-Only)
+<img src="./assert/vb.png">
+或者在高级设置中进行如下设置：
+<img src="./assert/vb1.png">
+此时在windows中输入，即可远程操作Linux。
+```shell
+ssh username@192.168.56.1
+```
+如遇到问题，可修改`/etc/ssh_config`配置文件
