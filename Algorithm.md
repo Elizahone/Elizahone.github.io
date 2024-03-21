@@ -1,12 +1,11 @@
 # Algorithm Notes
-<h1>目录：</h1>
-
-[位运算](#bitmap) 
+目录：
+- [位运算](#位运算)
 
 # [时间、空间复杂度](https://www.bilibili.com/video/BV1JV411G7De/?spm_id_from=333.999.0.0&vd_source=3e78417e114be9d4af93565f11845737)
 
 # 位运算
-<h2 id="bitmap"></h2>
+
 ## 位图
 小技巧 ： 向上取整可以写成（a + b - 1）/ b
 <p>位图原理：
