@@ -25,9 +25,9 @@ scp ./jdk-11.0.2.tar.gz hadoop@192.168.16.100:~/
 tar -zxvf path/to/Java.tar.gz -C path/to/Java
 ```
 `path/to/Java.tar.gz`代表Java压缩包的路径，相对或绝对路径均可。
-`-C` 后的路径是你要将压缩吧解压到的路径，可根据需要自行更改。本指南将安装到 `/opt/Java`中，因此，上方命令应 个性化 为 ： `tar -zxvf ./jdk-11.0.2_linux-x64_bin.tar.gz -C /opt/Java`
+`-C` 后的路径是你要将压缩吧解压到的路径，可根据需要自行更改。本文将安装到 `/opt/Java`中，因此，上方命令应 个性化 为 ： `tar -zxvf ./jdk-11.0.2_linux-x64_bin.tar.gz -C /opt/Java`
 
-入下所示：
+如下所示：
 <img src="./assert/Pasted image 20240321175524.png">
 
 **接着配置环境变量**：
