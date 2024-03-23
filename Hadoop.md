@@ -3,6 +3,7 @@
 - [Java安装与配置环境变量](#Java安装与配置环境变量)
 - [Hadoop安装与配置](#Hadoop安装与配置)
 - [伪分布式配置](#伪分布式配置)
+- [分布式集群配置](#分布式集群配置)
 - [SSH配置](SSH配置)
 
 ## Java安装与配置环境变量
@@ -74,7 +75,30 @@ export JAVA_HOME=/opt/Java//opt/Java/jdk-11.0.2
 由于书中案例给的足够详细，便在此不再赘述，请见 [厦门大学提供的文档](https://dblab.xmu.edu.cn/blog/2441/)
 
 ## 分布式集群配置
-写ing
+
+参考文档：
+[Hadoop集群安装配置教程](https://dblab.xmu.edu.cn/blog/2775/)
+[Hdoop官方文档](https://hadoop.apache.org/docs/r3.3.6/hadoop-project-dist/hadoop-common/ClusterSetup.html)
+
+为方便区分每一台机器，修改不同机器的主机名`/etc/hostname`， 然后再`/etc/hosts`文件中配置主机名与`IP`的映射。
+
+与伪分布式一样，名车节点机器`Master`需要无密码登录本身和各数据节点`Slave`， 故需要将`Master`的公钥放在各`Slave`中
+首先在`Master`中生成密钥对
+```shell
+# 生成密钥，建议选用 ed25519 算法
+ssh-keygen -t ed25519
+cat id_ed25519.pub >> authorized_keys
+```
+这样 `Master` 就可以连接自己了，但还需要连接 `Slave` ,即将公钥保存在 `Slave` 中的 `autorized_keys` ，首先将公钥拷贝到 `Slave` 中，在进行上述操作
+```shell
+scp ~/.ssh/id_ed25519.pub hadoop@Slave1:~/
+```
+然后在 `Slave1` 中修改 `authorized_keys` 
+```shell
+cat ~/id_ed25519.pub >> ~/.ssh/authorized_keys
+rm ~/id_ed25519.pub    # 用完以后就可以删掉
+```
+可以在 `Master` 中 `ssh hadoop@Slave1` 验证是否成功。
 
 ## SSH配置
 
