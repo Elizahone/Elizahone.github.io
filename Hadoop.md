@@ -78,6 +78,7 @@ export JAVA_HOME=/opt/Java//opt/Java/jdk-11.0.2
 
 参考文档：
 [Hadoop集群安装配置教程](https://dblab.xmu.edu.cn/blog/2775/)
+</br>
 [Hdoop官方文档](https://hadoop.apache.org/docs/r3.3.6/hadoop-project-dist/hadoop-common/ClusterSetup.html)
 
 为方便区分每一台机器，修改不同机器的主机名`/etc/hostname`， 然后再`/etc/hosts`文件中配置主机名与`IP`的映射。
