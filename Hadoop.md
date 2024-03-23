@@ -76,7 +76,7 @@ export JAVA_HOME=/opt/Java//opt/Java/jdk-11.0.2
 
 ## 分布式集群配置
 
-参考文档：
+参考文档：</br>
 [Hadoop集群安装配置教程](https://dblab.xmu.edu.cn/blog/2775/)
 </br>
 [Hdoop官方文档](https://hadoop.apache.org/docs/r3.3.6/hadoop-project-dist/hadoop-common/ClusterSetup.html)
