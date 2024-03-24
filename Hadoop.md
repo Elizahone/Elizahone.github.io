@@ -103,6 +103,128 @@ rm ~/id_ed25519.pub    # 用完以后就可以删掉
 ```
 可以在 `Master` 中 `ssh hadoop@Slave1` 验证是否成功。
 
+接下来的配置只需要针对 `Master`节点。
+-  修改 `./etc/hadoop/workers` 文件，将 `Master` 和 `Slave` 节点的 `IP` 或 `hostname` 填入其中，每行一个。（根据官网所说，只有将所有机器写入 `workers` 文件中， hadoop才能同时在大量机器 `(hosts)` 中同时运行命令）
+- 在 `core-site.xml` 配置如下配置
+```shell
+<configuration>
+        <property>
+                <name>fs.defaultFS</name>
+                <value>hdfs://Master:9000</value>
+        </property>
+        <property>
+                <name>hadoop.tmp.dir</name>
+                <value>file:/usr/local/hadoop/tmp</value>  <!-- 根据情况更改 -->
+                <description>Abase for other temporary directories.</description>
+        </property>
+</configuration>
+```
+
+-  在 `hdfs-site.xml` 中配置， 具体路径根据情况更改：
+
+```shell
+<configuration>
+        <property>
+                <name>dfs.namenode.secondary.http-address</name>
+                <value>Master:50090</value>
+        </property>
+        <property>
+                <name>dfs.replication</name>
+                <value>1</value>
+        </property>
+        <property>
+                <name>dfs.namenode.name.dir</name>
+                <value>file:/usr/local/hadoop/tmp/dfs/name</value>
+        </property>
+        <property>
+                <name>dfs.datanode.data.dir</name>
+                <value>file:/usr/local/hadoop/tmp/dfs/data</value>
+        </property>
+</configuration>
+```
+
+- `mapred-site.xml`配置如下：
+
+```shell
+<configuration>
+        <property>
+                <name>mapreduce.framework.name</name>
+                <value>yarn</value>
+        </property>
+        <property>
+                <name>mapreduce.jobhistory.address</name>
+                <value>Master:10020</value>
+        </property>
+        <property>
+                <name>mapreduce.jobhistory.webapp.address</name>
+                <value>Master:19888</value>
+        </property>
+        <property>
+                <name>yarn.app.mapreduce.am.env</name>
+                <value>HADOOP_MAPRED_HOME=/usr/local/hadoop</value>
+        </property>
+        <property>
+                <name>mapreduce.map.env</name>
+                <value>HADOOP_MAPRED_HOME=/usr/local/hadoop</value>
+        </property>
+        <property>
+                <name>mapreduce.reduce.env</name>
+                <value>HADOOP_MAPRED_HOME=/usr/local/hadoop</value>
+        </property> 
+</configuration>
+```
+
+- `yarn-site.xml` 配置：
+
+```shell
+<configuration>
+        <property>
+                <name>yarn.resourcemanager.hostname</name>
+                <value>Master</value>
+        </property>
+        <property>
+                <name>yarn.nodemanager.aux-services</name>
+                <value>mapreduce_shuffle</value>
+        </property>
+</configuration>
+```
+
+- 若以前配置过伪分布式，先删除临时文件
+```shell
+sudo rm -r ./hadoop/tmp     # 删除 Hadoop 临时文件
+sudo rm -r ./hadoop/logs/*   # 删除日志文件
+tar -zcf ~/hadoop.master.tar.gz ./hadoop   # 意思是将 ./hadoop 文件夹压缩
+cd ~
+scp ./hadoop.master.tar.gz Slave1:/home/hadoop
+```
+- 在 `Slave` 节点解压上述压缩包
+```shell
+sudo tar -zxvf ~/hadoop.master.tar.gz -C /opt
+sudo chown -R hadoop /opt/hadoop
+```
+
+- 在 `Master` 中连续输入两遍 `./bin/hdfs namenode -format`， 如果第二遍出现 `Re-format filesystem in Storage Directory root= /opt/hadoop/tmp/dfs/name; location= null ? (Y or N)` 表示上述操作配置成功。此时输入 `N(n)`.
+- 依次执行如下命令
+```shell
+start-dfs.sh
+start-yarn.sh
+mr-jobhistory-daemon.sh start historyserver
+
+# 或者
+start-dfs.sh && start-yarn.sh && mr-jobhistory-daemon.sh start historyserver
+
+# 相应的 关闭
+stop-yarn.sh
+stop-dfs.sh
+mr-jobhistory-daemon.sh stop historyserver
+# 或者
+stop-yarn.sh && stop-dfs.sh && mr-jobhistory-daemon.sh stop historyserver
+```
+- 在 `Master` 输入 jps 可以看到
+- 在 `Slave` 输入 jps 可以看到
+- 测试案例参考 [点击](https://dblab.xmu.edu.cn/blog/2775/) 文末 
+
+
 ## SSH配置
 
 由于VMWare的NAT模式的 `ip` 地址默认是以`192.168.xxx.xxx`形式配置，故不在此介绍。
