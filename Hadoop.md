@@ -1,4 +1,4 @@
-# hadoop
+# Hadoop
 
 - [Java安装与配置环境变量](#Java安装与配置环境变量)
 - [Hadoop安装与配置](#Hadoop安装与配置)
