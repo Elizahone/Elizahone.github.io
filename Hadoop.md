@@ -8,12 +8,12 @@
 
 ## Java安装与配置环境变量
 由于hadoop集群是用Java编写的，故想运行 **hadoop** 必须先安装 **Java** 环境， 安装方法如下：
-</br>
-	***方法一：***
-		直接使用各自Linux发行版的包管理器安装，如 Debian 和 Ubuntu 的 **apt 或 apt-get** , ArchLinux的**pacman**，Centos 的 **yum** 。该方法较为简单，请自行查阅自己系统的安装方式。
-  </br>
-	 ***方法二：***
-		 官网自行下载Java压缩包，如果你的Linux有浏览器，可以在浏览器中直接下载。若没有，可在 Windows 中下载，然后借用 ssh 传至 Linux 虚拟机中（或实体机）具体 SSH 配置请查阅 [SSH配置](#SSH配置)
+
+***方法一：***
+	直接使用各自Linux发行版的包管理器安装，如 Debian 和 Ubuntu 的 **apt 或 apt-get** , ArchLinux的**pacman**，Centos 的 **yum** 。该方法较为简单，请自行查阅自己系统的安装方式。
+
+ ***方法二：***
+	官网自行下载Java压缩包，如果你的Linux有浏览器，可以在浏览器中直接下载。若没有，可在 Windows 中下载，然后借用 ssh 传至 Linux 虚拟机中（或实体机）具体 SSH 配置请查阅 [SSH配置](#SSH配置)
 		 在Windows中打开powershell或cmd，输入如下命令：即可将文件传至Linux中的 home 目录中
 ```powershell
 scp path/to/Java user@xxx.xxx.xxx.xxx:~/
