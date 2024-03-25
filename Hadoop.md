@@ -221,8 +221,9 @@ stop-yarn.sh && stop-dfs.sh && mapred --daemon stop historyserver
 <img src="./assert/slave.png"> 
 
 
-- 务必执行测试案例   参考 [点击](https://dblab.xmu.edu.cn/blog/2775/) 文末 
+- 务必执行测试案例   参考 [点击](https://dblab.xmu.edu.cn/blog/2775/) 文末
 
+***后续将增加更多节点***
 
 ## SSH配置
 
