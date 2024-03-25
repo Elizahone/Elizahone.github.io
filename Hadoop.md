@@ -77,13 +77,10 @@ export JAVA_HOME=/opt/Java//opt/Java/jdk-11.0.2
 ## 分布式集群配置
 
 参考文档：
-
 [Hadoop集群安装配置教程](https://dblab.xmu.edu.cn/blog/2775/)
-
-
 [Hdoop官方文档](https://hadoop.apache.org/docs/r3.3.6/hadoop-project-dist/hadoop-common/ClusterSetup.html)
 
-为方便区分每一台机器，修改不同机器的主机名`/etc/hostname`， 然后再`/etc/hosts`文件中配置主机名与`IP`的映射。
+为方便区分每一台机器，修改不同机器的主机名`/etc/hostname`， 然后再`/etc/hosts`文件中配置主机名与`IP`的映射。每台机器都需配置
 
 与伪分布式一样，名车节点机器`Master`需要无密码登录本身和各数据节点`Slave`， 故需要将`Master`的公钥放在各`Slave`中
 首先在`Master`中生成密钥对
@@ -208,21 +205,23 @@ sudo chown -R hadoop /opt/hadoop
 ```shell
 start-dfs.sh
 start-yarn.sh
-mr-jobhistory-daemon.sh start historyserver
+mapred --daemon start historyserver
 
 # 或者
-start-dfs.sh && start-yarn.sh && mr-jobhistory-daemon.sh start historyserver
+start-dfs.sh && start-yarn.sh && mapred --daemon start historyserver
 
 # 相应的 关闭
 stop-yarn.sh
 stop-dfs.sh
-mr-jobhistory-daemon.sh stop historyserver
+mapred --daemon stop historyserver
 # 或者
-stop-yarn.sh && stop-dfs.sh && mr-jobhistory-daemon.sh stop historyserver
+stop-yarn.sh && stop-dfs.sh && mapred --daemon stop historyserver
 ```
-- 在 `Master` 输入 jps 可以看到
-- 在 `Slave` 输入 jps 可以看到
-- 测试案例参考 [点击](https://dblab.xmu.edu.cn/blog/2775/) 文末 
+输入 `hdfs dfsadmin -report` 查看数据节点情况，出现 `Slave`说明配置成功
+<img src="./assert/slave.png"> 
+
+
+- 务必执行测试案例   参考 [点击](https://dblab.xmu.edu.cn/blog/2775/) 文末 
 
 
 ## SSH配置
