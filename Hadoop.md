@@ -195,6 +195,7 @@ cd ~
 scp ./hadoop.master.tar.gz Slave1:/home/hadoop
 ```
 - 在 `Slave` 节点解压上述压缩包
+
 ```shell
 sudo tar -zxvf ~/hadoop.master.tar.gz -C /opt
 sudo chown -R hadoop /opt/hadoop
